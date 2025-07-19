@@ -1,0 +1,17 @@
+Recipe Recommendation System
+Task:
+Develop a recipe recommendation system using machine learning. The system should
+recommend recipes to users based on their preferences and dietary restrictions.
+Description:
+1- Collect a dataset of recipes along with their ingredients and user ratings.
+2- Preprocess the data and extract relevant features.
+3- Implement a recommendation system using techniques such as collaborative filtering or
+content-based filtering.
+4- Evaluate the performance of the recommendation system using metrics such as
+accuracy and precision.
+Additional Challenge:
+1- Implement a hybrid recommendation system that combines collaborative filtering and
+content-based filtering.
+2- Handle cold-start problem for new users and new recipes.
+Dataset Link:
+https://www.kaggle.com/datasets/kaggle/recipe-ingredients-dataset
