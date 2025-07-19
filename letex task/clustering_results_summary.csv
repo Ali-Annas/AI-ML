@@ -1,0 +1,13 @@
+Dataset,Algorithm,Silhouette Score,Execution Time (s),Clusters Found
+Spherical Clusters,kmeans,0.8756469540734731,0.5026330947875977,4
+Spherical Clusters,dbscan,0.798445504327423,0.00722503662109375,5
+Spherical Clusters,hierarchical,0.8756469540734731,0.00613713264465332,4
+Moon-shaped Clusters,kmeans,0.4794808505891615,0.08600854873657227,2
+Moon-shaped Clusters,dbscan,0.0,0.00657343864440918,1
+Moon-shaped Clusters,hierarchical,0.4427397580651086,0.017116308212280273,2
+Concentric Circles,kmeans,0.35388280092514873,0.1473388671875,2
+Concentric Circles,dbscan,0.0,0.00999307632446289,1
+Concentric Circles,hierarchical,0.31740908145227176,0.004549264907836914,2
+High-dimensional Data,kmeans,0.77524988857785,0.1428220272064209,3
+High-dimensional Data,dbscan,0.0,0.01711869239807129,1
+High-dimensional Data,hierarchical,0.77524988857785,0.026270627975463867,3

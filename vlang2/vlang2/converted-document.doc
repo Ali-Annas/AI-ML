@@ -1,0 +1,426 @@
+<html><body>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V Language Project Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        .file-structure {
+            background-color: #e8f4f8;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .feature-list {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .syntax-highlight {
+            background-color: #f1f2f6;
+            border-left: 4px solid #74b9ff;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+
+
+    <div class="container">
+        <h1>V Language Project Documentation</h1>
+        
+        <div class="info">
+            <strong>Project Overview:</strong> This is a custom programming language compiler project that translates V language code to C++. The project uses Flex (lexical analyzer) and Bison (parser generator) to create a complete compiler pipeline.
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="📁" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f4c1.svg"> Project Structure</h2>
+        <div class="file-structure">
+            <strong>Root Directory:</strong>
+            <ul>
+                <li><code>vlang</code> / <code>vlang.exe</code> - Compiled executable</li>
+                <li><code>test.vlang</code> - Sample V language program</li>
+                <li><code>output.cpp</code> - Generated C++ output</li>
+                <li><code>Makefile</code> - Build configuration</li>
+                <li><code>a.out</code> - Alternative executable</li>
+                <li><code>test_program.exe</code> - Test executable</li>
+            </ul>
+            
+            <strong>Source Directory (src/):</strong>
+            <ul>
+                <li><code>main.cpp</code> - Main entry point</li>
+                <li><code>parser.y</code> - Bison grammar file</li>
+                <li><code>lexer.flex</code> - Flex lexical analyzer</li>
+                <li><code>symbol-table.cpp</code> - Symbol table implementation</li>
+                <li><code>parser.tab.c</code> - Generated parser (from parser.y)</li>
+                <li><code>parser.tab.h</code> - Generated parser header</li>
+                <li><code>lex.yy.c</code> - Generated lexer (from lexer.flex)</li>
+                <li><code>parser.output</code> - Parser debugging output</li>
+            </ul>
+            
+            <strong>Include Directory (include/):</strong>
+            <ul>
+                <li><code>symbol-table.h</code> - Symbol table interface</li>
+                <li><code>utils.h</code> - Utility functions and operators</li>
+            </ul>
+            
+            <strong>Object Directory (obj/):</strong>
+            <ul>
+                <li>Contains compiled object files (.o)</li>
+            </ul>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="🔧" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f527.svg"> Build System</h2>
+        <div class="code-block">
+            <strong>Makefile:</strong>
+            <pre>all:
+	flex -o src/lex.yy.c src/lexer.flex
+	bison -d -v src/parser.y -o src/parser.tab.c
+	gcc -c src/lex.yy.c -o obj/lex.yy.o -Iinclude -g
+	gcc -c src/parser.tab.c -o obj/parser.tab.o -Iinclude -g
+	g++ -c src/main.cpp -o obj/main.o -Iinclude -g
+	g++ -c src/symbol-table.cpp -o obj/symbol-table.o -Iinclude -g
+	g++ obj/*.o -o vlang</pre>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="🎯" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f3af.svg"> Language Features</h2>
+        <div class="feature-list">
+            <h3>Supported Data Types:</h3>
+            <ul>
+                <li><strong>Scalar (scl):</strong> Integer variables</li>
+                <li><strong>Vector (vec):</strong> Integer arrays with dynamic operations</li>
+            </ul>
+            
+            <h3>Language Constructs:</h3>
+            <ul>
+                <li><strong>Variable Declaration:</strong> <code>scl variable_name;</code> or <code>vec variable_name{size};</code></li>
+                <li><strong>Assignment:</strong> <code>variable = expression;</code></li>
+                <li><strong>Vector Indexing:</strong> <code>vector:index</code></li>
+                <li><strong>Vector Assignment:</strong> <code>vector:index = value;</code></li>
+                <li><strong>Print Statement:</strong> <code>print "message": expression;</code></li>
+                <li><strong>Loop Statement:</strong> <code>loop expression { ... }</code></li>
+                <li><strong>Conditional Statement:</strong> <code>if expression { ... }</code></li>
+            </ul>
+            
+            <h3>Operators:</h3>
+            <ul>
+                <li><strong>Arithmetic:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code></li>
+                <li><strong>Vector Operations:</strong> <code>@</code> (dot product), <code>:</code> (indexing)</li>
+                <li><strong>Assignment:</strong> <code>=</code></li>
+            </ul>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="📝" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f4dd.svg"> Lexical Analysis (Flex)</h2>
+        <div class="code-block">
+            <strong>Key Tokens:</strong>
+            <ul>
+                <li><code>if</code>, <code>loop</code>, <code>print</code> - Control flow keywords</li>
+                <li><code>scl</code>, <code>vec</code> - Type declaration keywords</li>
+                <li><code>IDENTIFIER</code> - Variable names (alphanumeric + underscore)</li>
+                <li><code>NUMBER</code> - Integer literals</li>
+                <li><code>STRING</code> - String literals in quotes</li>
+                <li>Operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>@</code>, <code>:</code>, <code>=</code></li>
+                <li>Delimiters: <code>{</code>, <code>}</code>, <code>[</code>, <code>]</code>, <code>(</code>, <code>)</code>, <code>;</code>, <code>,</code></li>
+            </ul>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="🔍" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f50d.svg"> Syntax Analysis (Bison)</h2>
+        <div class="syntax-highlight">
+            <strong>Grammar Rules:</strong>
+            <ul>
+                <li><strong>Program:</strong> Consists of a block</li>
+                <li><strong>Block:</strong> Curly braces containing statement list</li>
+                <li><strong>Statements:</strong> Variable declarations, assignments, print, loop, conditional</li>
+                <li><strong>Expressions:</strong> Arithmetic, vector operations, indexing, function calls</li>
+            </ul>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="📊" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f4ca.svg"> Symbol Table</h2>
+        <div class="code-block">
+            <strong>Data Structures:</strong>
+            <pre>typedef enum variable_type {
+    VECTOR,
+    SCALAR,
+    UNDEFINED
+} variable_type;
+
+typedef struct var {
+    variable_type type;
+    int size; // only set when type is VECTOR
+} var;</pre>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="🔧" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f527.svg"> Utility Functions</h2>
+        <div class="code-block">
+            <strong>Vector Operations:</strong>
+            <ul>
+                <li><code>operator+</code>, <code>operator-</code>, <code>operator*</code>, <code>operator/</code> - Vector arithmetic</li>
+                <li><code>vector_dotprod</code> - Vector dot product</li>
+                <li><code>index_vector</code> - Vector indexing</li>
+                <li><code>assign_vector</code> - Vector assignment</li>
+                <li><code>operator&lt;&lt;</code> - Vector output formatting</li>
+            </ul>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="💻" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f4bb.svg"> Sample Program</h2>
+        <div class="code-block">
+            <strong>test.vlang:</strong>
+            <pre>{
+    scl x;
+    scl y;
+    scl i;
+    vec v1{6};
+    vec v2{6};
+    vec v3{6};
+    x = 2;
+    v1 = 2*x;
+    v2 = [1,1,2,2,3,3];
+    print "V1<dot>V2": v1@v2;
+    y = v2:4;
+    i = 0;
+    loop y
+    {
+        v1:i = i;
+        i = i+1;
+    }
+    print "v1 is": v1;
+    print "v2 indexed": v2:v1;
+    print "that reversed":v2:v1:[5,4,3,2,1,0];
+    v3 = v1 + v2;
+    print "":v2:([2,1,0,2,2,0]@v3/10); 
+    vec a{3};
+    a = [10, 0, 20];
+    i=0;
+    loop 3 {
+        if a@[1, 0, 0] {
+            print "Rotate": i, a;
+            a = a:[2, 0, 1];
+        }
+        i = i+1;
+    }
+    vec z{4};
+    z = 10;
+    z = (z + [2, 4, 6, 8]) / 2;
+    z = z - 3 + [2, 3, 4, 5];
+    print "z is": z;
+    print "z summed": z@[1, 1, 1, 1];
+}</dot></pre>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="🔄" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f504.svg"> Compilation Process</h2>
+        <div class="info">
+            <ol>
+                <li><strong>Lexical Analysis:</strong> Flex generates <code>lex.yy.c</code> from <code>lexer.flex</code></li>
+                <li><strong>Syntax Analysis:</strong> Bison generates <code>parser.tab.c</code> and <code>parser.tab.h</code> from <code>parser.y</code></li>
+                <li><strong>Compilation:</strong> All source files are compiled to object files</li>
+                <li><strong>Linking:</strong> Object files are linked to create the final executable <code>vlang</code></li>
+                <li><strong>Execution:</strong> The compiler reads V language code and generates C++ output in <code>output.cpp</code></li>
+            </ol>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="⚠️" src="https://s.w.org/images/core/emoji/15.1.0/svg/26a0.svg"> Error Handling</h2>
+        <div class="warning">
+            <strong>Current Error Handling:</strong>
+            <ul>
+                <li>Lexical errors: Reported with line numbers</li>
+                <li>Syntax errors: Reported with line numbers</li>
+                <li>Semantic errors: Undefined variable usage, type mismatches</li>
+                <li>Vector size mismatches: Runtime exceptions in C++ code</li>
+            </ul>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="🚀" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f680.svg"> Usage Instructions</h2>
+        <div class="code-block">
+            <strong>Build the project:</strong>
+            <pre>make</pre>
+            
+            <strong>Compile a V language program:</strong>
+            <pre>./vlang &lt; input.vlang</pre>
+            
+            <strong>Compile the generated C++:</strong>
+            <pre>g++ output.cpp -o program</pre>
+            
+            <strong>Run the program:</strong>
+            <pre>./program</pre>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="📈" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f4c8.svg"> Project Dependencies</h2>
+        <table>
+            <tbody><tr>
+                <th>Tool</th>
+                <th>Purpose</th>
+                <th>Version</th>
+            </tr>
+            <tr>
+                <td>Flex</td>
+                <td>Lexical analyzer generator</td>
+                <td>2.6.4+</td>
+            </tr>
+            <tr>
+                <td>Bison</td>
+                <td>Parser generator</td>
+                <td>3.0+</td>
+            </tr>
+            <tr>
+                <td>GCC</td>
+                <td>C compiler</td>
+                <td>4.8+</td>
+            </tr>
+            <tr>
+                <td>G++</td>
+                <td>C++ compiler</td>
+                <td>4.8+</td>
+            </tr>
+            <tr>
+                <td>Make</td>
+                <td>Build automation</td>
+                <td>3.8+</td>
+            </tr>
+        </tbody></table>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="🔍" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f50d.svg"> Key Features Added/Modified</h2>
+        <div class="feature-list">
+            <h3>Language Features:</h3>
+            <ul>
+                <li><strong>Vector Operations:</strong> Complete vector arithmetic with size checking</li>
+                <li><strong>Indexing:</strong> Vector indexing with bounds checking</li>
+                <li><strong>Dot Product:</strong> Vector dot product operation using <code>@</code> operator</li>
+                <li><strong>Type System:</strong> Scalar and vector types with type checking</li>
+                <li><strong>Control Flow:</strong> Loops and conditional statements</li>
+                <li><strong>Output Formatting:</strong> Custom vector output with bracket notation</li>
+            </ul>
+            
+            <h3>Compiler Features:</h3>
+            <ul>
+                <li><strong>Symbol Table:</strong> Variable tracking with type information</li>
+                <li><strong>Error Reporting:</strong> Line number based error messages</li>
+                <li><strong>C++ Code Generation:</strong> Direct translation to C++ with proper formatting</li>
+                <li><strong>Memory Management:</strong> Proper string handling and memory allocation</li>
+            </ul>
+        </div>
+
+        <h2><img draggable="false" role="img" class="emoji" alt="📋" src="https://s.w.org/images/core/emoji/15.1.0/svg/1f4cb.svg"> File Descriptions</h2>
+        <table>
+            <tbody><tr>
+                <th>File</th>
+                <th>Description</th>
+                <th>Lines</th>
+            </tr>
+            <tr>
+                <td>src/main.cpp</td>
+                <td>Main entry point, handles file I/O and parser invocation</td>
+                <td>19</td>
+            </tr>
+            <tr>
+                <td>src/parser.y</td>
+                <td>Bison grammar file defining language syntax and code generation</td>
+                <td>164</td>
+            </tr>
+            <tr>
+                <td>src/lexer.flex</td>
+                <td>Flex lexical analyzer defining tokens and patterns</td>
+                <td>39</td>
+            </tr>
+            <tr>
+                <td>include/symbol-table.h</td>
+                <td>Symbol table interface and data structures</td>
+                <td>32</td>
+            </tr>
+            <tr>
+                <td>include/utils.h</td>
+                <td>Vector operations and utility functions</td>
+                <td>125</td>
+            </tr>
+            <tr>
+                <td>src/symbol-table.cpp</td>
+                <td>Symbol table implementation using unordered_map</td>
+                <td>33</td>
+            </tr>
+            <tr>
+                <td>test.vlang</td>
+                <td>Sample V language program demonstrating all features</td>
+                <td>40</td>
+            </tr>
+            <tr>
+                <td>output.cpp</td>
+                <td>Generated C++ code from test.vlang</td>
+                <td>45</td>
+            </tr>
+        </tbody></table>
+
+        
+    </div>
+
+ </body></html>
