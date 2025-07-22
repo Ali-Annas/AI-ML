@@ -1,0 +1,31 @@
+HEARTBEAT DETECTION REPORT
+============================================================
+Analysis Date: 2025-07-22 10:10:02
+Total files analyzed: 2
+
+Abdominal Placement:
+  File: .\My Experiment_Phone Abdominal placement\Accelerometer.csv
+  Duration: 97.4 seconds
+  Total samples: 39029
+  Heartbeats detected: 16
+  Heart rate: 66.5 BPM
+  Signal mean: -0.012 m/s²
+  Signal std: 0.094 m/s²
+  Filtered mean: 0.001 m/s²
+  Filtered std: 0.095 m/s²
+  Interval std: 0.321 s
+  Interval CV: 0.355
+----------------------------------------
+Chest Placement:
+  File: .\My Experiment_Phone_Chest placement\Accelerometer.csv
+  Duration: 102.9 seconds
+  Total samples: 41229
+  Heartbeats detected: 10
+  Heart rate: 83.0 BPM
+  Signal mean: -0.061 m/s²
+  Signal std: 0.494 m/s²
+  Filtered mean: -0.000 m/s²
+  Filtered std: 0.206 m/s²
+  Interval std: 0.151 s
+  Interval CV: 0.209
+----------------------------------------
